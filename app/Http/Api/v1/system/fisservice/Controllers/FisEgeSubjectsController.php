@@ -1,0 +1,26 @@
+<?php
+namespace App\Http\Api\v1\system\fisservice\Controllers;
+
+use Illuminate\Http\Request;
+use App\Http\sources\Controller;
+use App\Http\Api\v1\system\fisservice\Entities\FisEgeSubjectsEntity;
+
+
+
+class FisEgeSubjectsController extends Controller{
+    
+    function index(Request $request){
+        $FisEgeSubjectsEntity = new FisEgeSubjectsEntity;
+        return $FisEgeSubjectsEntity::get($request->all());
+    }
+
+    function store(Request $request){
+        $FisEgeSubjectsEntity = new FisEgeSubjectsEntity;
+        return $FisEgeSubjectsEntity::set($request->all());
+    }
+
+    function show($id){
+        $FisEgeSubjectsEntity = new FisEgeSubjectsEntity;
+        return $FisEgeSubjectsEntity::get($id);
+    }
+}

@@ -1,0 +1,519 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Апи Пензенского государственного университета",
+        "version": "2.0"
+    },
+    "paths": {
+        "/example/app": {
+            "get": {
+                "tags": [
+                    "example"
+                ],
+                "summary": "Тестовый url получающий заявления",
+                "description": "Тестовый url получающий заявления",
+                "operationId": "48a474779f805f8388386b6a446ed3f2",
+                "responses": {
+                    "200": {
+                        "description": "Успешно",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "format": "string",
+                                            "example": "Successfully"
+                                        },
+                                        "paginator": {
+                                            "$ref": "#/components/schemas/Paginator"
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/AppTransformer"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Ошибка",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "format": "string",
+                                            "example": "Error"
+                                        },
+                                        "data": {
+                                            "properties": {
+                                                "Message": {
+                                                    "type": "string",
+                                                    "format": "string",
+                                                    "example": "syntax error, unexpected token \"}\""
+                                                },
+                                                "Info": {
+                                                    "$ref": "#/components/schemas/Error"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "example"
+                ],
+                "summary": "Тестовый url для создание заявления",
+                "description": "Тестовый url для создание заявления",
+                "operationId": "91073d4d41ae4549346d43cb7c48f895",
+                "requestBody": {
+                    "$ref": "#/components/requestBodies/AppCreateRequest"
+                },
+                "responses": {
+                    "200": {
+                        "description": "Успешно",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "format": "string",
+                                            "example": "Successfully"
+                                        },
+                                        "data": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "format": "int",
+                                                    "example": 1
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Ошибка",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "format": "string",
+                                            "example": "Error"
+                                        },
+                                        "data": {
+                                            "properties": {
+                                                "Message": {
+                                                    "type": "string",
+                                                    "format": "string",
+                                                    "example": "syntax error, unexpected token \"}\""
+                                                },
+                                                "Info": {
+                                                    "$ref": "#/components/schemas/Error"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "example"
+                ],
+                "summary": "Тестовый url для удаления заявления",
+                "description": "Тестовый url для удаления заявления",
+                "operationId": "c038dab92d25df9a273108eb06cac185",
+                "responses": {
+                    "200": {
+                        "description": "Успешно",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "format": "string",
+                                            "example": "Successfully"
+                                        },
+                                        "data": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "format": "int",
+                                                    "example": 1
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Ошибка",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "format": "string",
+                                            "example": "Error"
+                                        },
+                                        "data": {
+                                            "properties": {
+                                                "Message": {
+                                                    "type": "string",
+                                                    "format": "string",
+                                                    "example": "syntax error, unexpected token \"}\""
+                                                },
+                                                "Info": {
+                                                    "$ref": "#/components/schemas/Error"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "example"
+                ],
+                "summary": "Тестовый url для изменения заявления",
+                "description": "Тестовый url для изменения заявления",
+                "operationId": "c3de63875f4a138591d887d9a7671d0d",
+                "requestBody": {
+                    "$ref": "#/components/requestBodies/AppChangeRequest"
+                },
+                "responses": {
+                    "200": {
+                        "description": "Успешно",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "format": "string",
+                                            "example": "Successfully"
+                                        },
+                                        "data": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "format": "int",
+                                                    "example": 1
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Ошибка",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "format": "string",
+                                            "example": "Error"
+                                        },
+                                        "data": {
+                                            "properties": {
+                                                "Message": {
+                                                    "type": "string",
+                                                    "format": "string",
+                                                    "example": "syntax error, unexpected token \"}\""
+                                                },
+                                                "Info": {
+                                                    "$ref": "#/components/schemas/Error"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/example/app/{id}": {
+            "get": {
+                "tags": [
+                    "example"
+                ],
+                "summary": "Тестовый url получающий заявление",
+                "description": "Тестовый url получающий заявление",
+                "operationId": "9de32fdb801135b0e167dc05691de1e5",
+                "responses": {
+                    "200": {
+                        "description": "Успешно",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "format": "string",
+                                            "example": "Successfully"
+                                        },
+                                        "paginator": {
+                                            "$ref": "#/components/schemas/Paginator"
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/AppTransformer"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Ошибка",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "format": "string",
+                                            "example": "Error"
+                                        },
+                                        "data": {
+                                            "properties": {
+                                                "Message": {
+                                                    "type": "string",
+                                                    "format": "string",
+                                                    "example": "syntax error, unexpected token \"}\""
+                                                },
+                                                "Info": {
+                                                    "$ref": "#/components/schemas/Error"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Error": {
+                "properties": {
+                    "line": {
+                        "type": "integer",
+                        "example": 37
+                    },
+                    "file": {
+                        "type": "string",
+                        "format": "string",
+                        "example": "/path_to_file/..."
+                    }
+                },
+                "type": "object"
+            },
+            "Paginator": {
+                "properties": {
+                    "current_page": {
+                        "type": "integer",
+                        "format": "int",
+                        "example": "1"
+                    },
+                    "from": {
+                        "type": "integer",
+                        "format": "int",
+                        "example": "1"
+                    },
+                    "last_page": {
+                        "type": "integer",
+                        "format": "int",
+                        "example": "380"
+                    },
+                    "per_page": {
+                        "type": "integer",
+                        "format": "int",
+                        "example": "30"
+                    },
+                    "to": {
+                        "type": "integer",
+                        "format": "int",
+                        "example": "30"
+                    },
+                    "total": {
+                        "type": "integer",
+                        "format": "int",
+                        "example": "11371"
+                    }
+                },
+                "type": "object"
+            },
+            "AppTransformer": {
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int",
+                        "example": "1"
+                    },
+                    "id_execution": {
+                        "type": "integer",
+                        "format": "int",
+                        "example": "123456"
+                    },
+                    "id_level": {
+                        "type": "integer",
+                        "format": "int",
+                        "example": "2"
+                    },
+                    "is_budget": {
+                        "type": "integer",
+                        "format": "int",
+                        "example": "1"
+                    },
+                    "id_source": {
+                        "type": "integer",
+                        "format": "int",
+                        "example": "4"
+                    },
+                    "guid_app": {
+                        "type": "string",
+                        "format": "string",
+                        "example": "df4r3-g43ffg4-ds32dg-h5h5"
+                    },
+                    "is_original": {
+                        "type": "integer",
+                        "format": "int",
+                        "example": "0"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "requestBodies": {
+            "AppChangeRequest": {
+                "required": true,
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "properties": {
+                                "id_execution": {
+                                    "schema": "int|string",
+                                    "type": "integer",
+                                    "format": "int",
+                                    "example": "123456"
+                                },
+                                "id_level": {
+                                    "schema": "int|string|min:2|max:93",
+                                    "type": "integer",
+                                    "format": "int",
+                                    "example": "2"
+                                },
+                                "id_source": {
+                                    "schema": "int|string|min:1|max:4",
+                                    "type": "integer",
+                                    "format": "int",
+                                    "example": "4"
+                                },
+                                "guid_app": {
+                                    "schema": "string",
+                                    "type": "string",
+                                    "format": "string",
+                                    "example": "df4r3-g43ffg4-ds32dg-h5h5"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "AppCreateRequest": {
+                "required": true,
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "properties": {
+                                "id_execution": {
+                                    "schema": "required|int|string",
+                                    "type": "integer",
+                                    "format": "int",
+                                    "example": "123456"
+                                },
+                                "id_source": {
+                                    "schema": "required|int|string|min:1|max:4",
+                                    "type": "integer",
+                                    "format": "int",
+                                    "example": "4"
+                                },
+                                "guid_app": {
+                                    "schema": "string",
+                                    "type": "string",
+                                    "format": "string",
+                                    "example": "df4r3-g43ffg4-ds32dg-h5h5"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "example",
+            "description": "example"
+        }
+    ]
+}
