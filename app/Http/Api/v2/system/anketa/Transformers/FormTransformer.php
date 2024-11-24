@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Transformers;
+namespace App\Http\Api\v2\system\anketa\Transformers;
 
 use App\Http\sources\Transformer;
 use Illuminate\Http\Request;

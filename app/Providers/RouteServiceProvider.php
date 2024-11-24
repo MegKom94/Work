@@ -27,9 +27,9 @@ class RouteServiceProvider extends ServiceProvider
         RateLimiter::for('api', function (Request $request) {
             return Limit::perMinute(1000)->by($request->user()->id ?: $request->ip());
         });
-        
-        
-        $this->routes(function () {            
+
+
+        $this->routes(function () {
             $routes = [
                 Route::middleware('api')->prefix('test/api')->group(base_path('routes/api.php')),
                 Route::middleware('api')->prefix('prod/api')->group(base_path('routes/api.php')),
@@ -47,13 +47,16 @@ class RouteServiceProvider extends ServiceProvider
                     $path = base_path("app/Http/Api/{$version}/system/{$system}/Routes/api.php");
                     if(!file_exists($path)) continue;
 
-                    array_push($routes,  
-                        Route::middleware('api')->prefix("test/api/{$version}/{$system}/")->group($path),
+                    // добавил пространоство имен для маршрутов test/ ->namespace в array_push
+                    $apiNamespace = "App\Http\Api\\{$version}\system\\{$system}\Controllers";
+
+                    array_push($routes,
+                        Route::middleware('api')->prefix("test/api/{$version}/{$system}/")->namespace($apiNamespace)->group($path),
                         Route::middleware('api')->prefix("prod/api/{$version}/{$system}/")->group($path),
                         Route::middleware('api')->prefix("mdl/api/{$version}/{$system}/")->group($path)
                     );
                 }
-            }  
+            }
 
             return $routes;
         });

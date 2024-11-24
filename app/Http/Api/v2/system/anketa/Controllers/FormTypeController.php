@@ -1,14 +1,14 @@
 <?php
-namespace App\Http\Api\v2\system\form_type\Controllers;
+namespace App\Http\Api\v2\system\anketa\Controllers;
 
-use App\Http\sources\Controller;
+use App\Http\Api\v2\system\anketa\Transformers\FormTypeTransformer;
+use App\Http\sources\standartController;
 use App\Models\FormsTypes;
-use App\Transformers\FormTypeTransformer;
+
 use DB;
 use Illuminate\Http\Request;
-use SoftDeleteFlagTrait;
 
-class FormTypeController extends Controller
+class FormTypeController extends standartController
 {
     //вернет список FormType
     public function list()
@@ -31,7 +31,7 @@ class FormTypeController extends Controller
     public function statistics($form_type_id)
     {
         $form_type = FormsTypes::where('id', $form_type_id)
-            //жадная загрузка- достаем ("вопросы","связку связки") ->объЯВЛЯЕМ УСЛОВИЕ ПО КОТРОЙ БУЕТ ПРОХОДИТЬ ЖАДНАЯ СВЯЗКА 
+            //жадная загрузка- достаем ("вопросы","связку связки") ->объЯВЛЯЕМ УСЛОВИЕ ПО КОТРОЙ БУЕТ ПРОХОДИТЬ ЖАДНАЯ СВЯЗКА
             ->with([
                 'forms' => function ($query) {
                     $query->withCount('allAnswersUsers');
@@ -56,9 +56,8 @@ class FormTypeController extends Controller
     //     dd($result);
 
     // }
-    public function create($request)
+    public function create(Request $request, FormsTypes $form_type)
     {
-        $form_type = new FormsTypes;
         $form = $this->validateFormType($request);
         $form_type->fill($form);
         $form_type->save();
@@ -84,16 +83,10 @@ class FormTypeController extends Controller
             // 'id_site'=> ['required',Rule::in(0,1), 'integer']
         ]);
     }
-    function delete($request, string $form_type)
-    {  
-        $form_types=FormsTypes::get();
-        dd($form_types);
-        if ($form_types->trashed())
-            dd('true');
-        else
-           dd('else');
-            
+    public function delete(Request $request, FormsTypes $form_type)
+    {
+        $form_type->delete();
 
-        // return $this->ok();// $form_types->delete();
+        return $this->ok();
     }
 }

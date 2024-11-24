@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Http\Api\v2\system\FormAnswer\Controllers;
+namespace App\Http\Api\v2\system\anketa\Controllers;
 
-use App\Http\sources\Controller;
+use App\Http\Api\v2\system\anketa\Transformers\FormAnswerTransformer;
+use App\Http\sources\standartController;
 use App\Models\FormsAnswers;
-use App\Transformers\FormAnswerTransformer;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
-class FormAnswerController extends Controller
+class FormAnswerController extends standartController
 {
     public function list()
     {
@@ -19,9 +19,8 @@ class FormAnswerController extends Controller
     {
         return new FormAnswerTransformer($answer, []);
     }
-    public function create($request)
+    public function create(Request $request, FormsAnswers $answer)
     {
-        $answer= new FormsAnswers;
         $form = $this->validateFormAnswer($request);
         $answer->fill($form);
         $answer->form()->associate($form['id_form']);

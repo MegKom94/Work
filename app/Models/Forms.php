@@ -16,7 +16,7 @@ class Forms extends Model{
 	protected $guarded = [];
 
 	const DELETED_AT = 'is_deleted';
-	
+
 	static function relationship(){
 		return [
 			'FormsTypes'=>[
@@ -41,4 +41,9 @@ class Forms extends Model{
 		$model = 'FormsAnswers';
 		return $this->hasMany(self::relationship()[$model]['class'], self::relationship()[$model]['0'], self::relationship()[$model]['1']);
 	}
+    // переделать
+    public function allAnswersUsers()
+    {
+        return $this->hasMany(FormsUsers::class, 'id_form');
+    }
 }

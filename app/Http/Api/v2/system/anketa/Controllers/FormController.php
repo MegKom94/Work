@@ -1,16 +1,16 @@
 <?php
-namespace App\Http\Api\v2\system\form\Controllers;
+namespace App\Http\Api\v2\system\anketa\Controllers;
 
-use App\Http\sources\Controller;
+use App\Http\Api\v2\system\anketa\Transformers\FormTransformer;
+use App\Http\Api\v2\system\anketa\Transformers\FormUserTransformer;
+use App\Http\sources\standartController;
 use App\Models\Forms;
 use App\Models\FormsUsers;
-use App\Transformers\FormTransformer;
-use App\Transformers\FormUserTransformer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
 
-class FormController extends Controller
+class FormController extends standartController
 {
     public function list()
     {
@@ -23,12 +23,11 @@ class FormController extends Controller
         return new FormTransformer($form, []);
     }
 
-    public function create($request)
+    public function create(Request $request, Forms $form)
     {
-        $form=new Forms;
         $question = $this->validateForm($request);
         $form->fill($question);
-        $form->formType()->associate($question['id_type']);
+        $form->form_type()->associate($question['id_type']);
         $form->save();
 
         return $this->ok();
@@ -45,7 +44,7 @@ class FormController extends Controller
     }
     public function statistics($form_id, Request $request)
     {
-        $form = Form::where('id', $form_id)->with([
+        $form = Forms::where('id', $form_id)->with([
             'answers' => function ($query) {
                 $query->withCount('answersUsers');
             }
@@ -91,17 +90,11 @@ class FormController extends Controller
             'is_deleted' => ['required', Rule::in(0, 1)]
         ]);
     }
-    public function delete($request, string $form)
+    public function delete(Forms $form)
     {
-        $form= new Forms(array($form));
-        if ($form->trashed())
-            return 'ErrorException';
-        else
-            $form->delete();
-
+        $form->delete();
         return $this->ok();
         // forceDelete() совсем удаляет из бд
-
     }
     // public function restore(Form $form)
     // {

@@ -11,7 +11,7 @@ class FormsTypes extends Model{
 	public $table = 'lk.forms_types';
 	public $timestamps = false;
 	protected $guarded = [];
-	
+
 	static function relationship(){
 		return [
 			'Forms'=>[
@@ -24,6 +24,7 @@ class FormsTypes extends Model{
 
 	function Forms(){
 		$model = 'Forms';
+        //Вопрс зачем релейшен реализован через вызов праметров в функции? второй почему вызов функции 3 раза?
 		return $this->hasMany(self::relationship()[$model]['class'], self::relationship()[$model]['0'], self::relationship()[$model]['1']);
 	}
 }
